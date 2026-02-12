@@ -1,0 +1,11 @@
+ apiVersion: v1
+ kind: Service
+ metadata:
+  name: paysecure-service
+ spec:
+  type: LoadBalancer
+  selector:
+    app: paysecure
+  ports:
+    - port: 80
+      targetPort: 9000

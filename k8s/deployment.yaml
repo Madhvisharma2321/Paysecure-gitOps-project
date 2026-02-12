@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paysecure-app
+  labels:
+    app: paysecure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paysecure
+  template:
+    metadata:
+      labels:
+        app: paysecure
+    spec:
+      containers:
+        - name: paysecure
+          image: 584868042947.dkr.ecr.ap-south-1.amazonaws.com/paysecure-app:c6d5d71ded5660736e11537a77e2a94b462b0eb2
+          ports:
+            - containerPort: 9000
+          env:
+            - name: DB_HOST
+              value: "paysecure-rds.xxxxxx.ap-south-1.rds.amazonaws.com"
+            - name: DB_NAME
+              value: "payments"
+            - name: DB_USER
+              value: "payuser"
+            - name: DB_PASSWORD
+              value: "paypass123"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
